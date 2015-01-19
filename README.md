@@ -13,22 +13,34 @@ A logger that no-ops
 ## Example
 
 ```js
-var nullLogtron = require("null-logtron");
+var NullLogtron = require("null-logtron");
 
-// TODO. Show example
+var logger = NullLogtron();
+logger.debug('some static string', { some: 'meta obj' })
+logger.info('some static string', { some: 'meta obj' })
+logger.warn('some static string', { some: 'meta obj' })
+logger.error('some static string', { some: 'meta obj' })
 ```
+
+The NullLogger does not write anywhere. It actually writes
+  to a circular buffer in memory (pre-allocated to 50).
+
+## Motivation
+
+If your writing a library you want the application developer
+  to pass in a logger. You cannot default a logger because that
+  breaks the unix rule of silence.
+
+So you either need a no-op logger or you need a ton of if
+  statements. This is a cheap no-op logger.
+
+I've chosen to back it by a RingBuffer so that if you do REPL
+  into your process you can inspect the log statements.
+
+The RingBuffer only holds 50 log records so the memory overhead
+  is trivial.
 
 ## Docs
-
-### `var someValue = nullLogtron(/*arguments*/)`
-
-<!--
-  This is a jsig notation of your interface.
-  https://github.com/Raynos/jsig
--->
-```ocaml
-null-logtron := (arg: Any) => void
-```
 
 // TODO. State what the module does.
 
