@@ -35,6 +35,10 @@ proto.info = function info(msg, meta, cb) {
     this._log('info', msg, meta, cb);
 };
 
+proto.access = function access(msg, meta, cb) {
+    this._log('access', msg, meta, cb);
+};
+
 proto.warn = function warn(msg, meta, cb) {
     this._log('warn', msg, meta, cb);
 };

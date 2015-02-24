@@ -31,6 +31,7 @@ test('can call methods', function t(assert) {
     logger.trace(msg, meta);
     logger.debug(msg, meta);
     logger.info(msg, meta);
+    logger.access(msg, meta);
     logger.warn(msg, meta);
     logger.error(msg, meta);
     logger.fatal(msg, meta);
@@ -57,17 +58,22 @@ test('can call methods', function t(assert) {
     var line4 = elements[3];
     assert.equal(line4.msg, msg);
     assert.equal(line4.meta, meta);
-    assert.equal(line4.level, 'warn');
+    assert.equal(line4.level, 'access');
 
     var line5 = elements[4];
     assert.equal(line5.msg, msg);
     assert.equal(line5.meta, meta);
-    assert.equal(line5.level, 'error');
+    assert.equal(line5.level, 'warn');
 
     var line6 = elements[5];
     assert.equal(line6.msg, msg);
     assert.equal(line6.meta, meta);
-    assert.equal(line6.level, 'fatal');
+    assert.equal(line6.level, 'error');
+
+    var line7 = elements[6];
+    assert.equal(line7.msg, msg);
+    assert.equal(line7.meta, meta);
+    assert.equal(line7.level, 'fatal');
 
     assert.end();
 });
