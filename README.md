@@ -25,6 +25,29 @@ logger.error('some static string', { some: 'meta obj' })
 The NullLogger does not write anywhere. It actually writes
   to a circular buffer in memory (pre-allocated to 50).
 
+## Using in tests
+
+You can use the `.items()` method in your tests to read the
+records that have been written to the logger.
+
+```js
+var NullLogtron = require('null-logtron');
+var test = require('tape');
+
+test('some module', function t(assert) {
+    var logger = NullLogtron();
+    var thing = new Thing({ logger: logger })
+
+    thing.doStuff();
+
+    var items = logger.items();
+    assert.equal(items.filter(function (x) {
+        return x.level === 'error'
+    }).length, 1, 'thing writes to logger.error()');
+    assert.end();
+});
+```
+
 ## Motivation
 
 If your writing a library you want the application developer

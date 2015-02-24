@@ -36,8 +36,7 @@ test('can call methods', function t(assert) {
     logger.error(msg, meta);
     logger.fatal(msg, meta);
 
-    var buffer = logger._buffer;
-    var elements = buffer._elements;
+    var elements = logger.items();
 
     assert.equal(elements.length, 50);
     var line1 = elements[0];

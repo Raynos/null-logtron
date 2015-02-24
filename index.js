@@ -51,6 +51,10 @@ proto.fatal = function fatal(msg, meta, cb) {
     this._log('fatal', msg, meta, cb);
 };
 
+proto.items = function items() {
+    return this._buffer._elements.slice();
+};
+
 function NullLogtronRecord(level, msg, meta) {
     this.level = level;
     this.msg = msg;
